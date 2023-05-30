@@ -1,0 +1,79 @@
+.weather {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(
+      to bottom,
+      cornflowerblue 1%,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    url("https://res.cloudinary.com/drdgu83bp/image/upload/v1685457031/piweather/sunny_fbxzdo.jpg");
+  background-position: center;
+  background-size: cover;
+  background-position: center center;
+}
+
+.weather-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+  padding-bottom: 100px;
+}
+
+.circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: whitesmoke;
+  box-shadow: 3px 3px 3px 1px #0000004b;
+}
+
+#weather-top {
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  animation: appear linear 1s;
+}
+
+#temp-feels {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  bottom: 0;
+  right: 50px;
+  z-index: 2;
+  animation: appear linear 2s;
+}
+
+#humidity {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  bottom: -50px;
+  left: 60px;
+  z-index: 3;
+  animation: appear linear 2s;
+}
+
+#wind {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  bottom: -120px;
+  right: 280px;
+  z-index: 3;
+  animation: appear linear 2s;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

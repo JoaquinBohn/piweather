@@ -1,0 +1,20 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar-logo {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-logo-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  box-shadow: 3px 3px 3px 1px #0000004b;
+}
