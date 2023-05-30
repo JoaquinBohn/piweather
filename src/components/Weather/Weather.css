@@ -3,14 +3,42 @@
   height: 100vh;
   background-image: linear-gradient(
       to bottom,
-      cornflowerblue 1%,
+      cornflowerblue,
       rgba(255, 255, 255, 0),
       rgba(255, 255, 255, 0)
     ),
-    url("https://res.cloudinary.com/drdgu83bp/image/upload/v1685457031/piweather/sunny_fbxzdo.jpg");
+    url("https://res.cloudinary.com/drdgu83bp/image/upload/v1685477985/piweather/landscape_enca8w.jpg");
   background-position: center;
   background-size: cover;
   background-position: center center;
+}
+
+.search {
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  text-align: center;
+  animation: appear linear 1s;
+}
+
+.search input {
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 3px 3px 3px 1px #0000004b;
+}
+
+.search-button {
+  cursor: pointer;
+  position: relative;
+  left: -50px;
+  padding: 4px;
+  font-size: 20px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 3px 3px 3px 1px #0000004b;
+  background-color: cornflowerblue;
 }
 
 .weather-container {
@@ -32,6 +60,26 @@
   box-shadow: 3px 3px 3px 1px #0000004b;
 }
 
+.bold {
+  font-weight: 600;
+}
+
+.empty {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: whitesmoke;
+}
+
 #weather-top {
   width: 300px;
   height: 300px;
@@ -40,21 +88,21 @@
 }
 
 #temp-feels {
-  width: 200px;
-  height: 200px;
+  width: 190px;
+  height: 190px;
   position: relative;
   bottom: 0;
-  right: 50px;
+  right: 40px;
   z-index: 2;
   animation: appear linear 2s;
 }
 
 #humidity {
-  width: 180px;
-  height: 180px;
+  width: 130px;
+  height: 130px;
   position: relative;
   bottom: -50px;
-  left: 60px;
+  left: 50px;
   z-index: 3;
   animation: appear linear 2s;
 }

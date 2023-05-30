@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Weather.css";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
@@ -6,57 +6,73 @@ import axios from "axios";
 const Weather = () => {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
-  //const [latitude, setLatitude] = useState('');
-  //const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
 
-  //const cityUrl = "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}";
-  const weatherUrl =
-    "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=4ddd21df58bbb82ea15279b5f4f07fc2";
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(location);
+    const cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=4ddd21df58bbb82ea15279b5f4f07fc2`;
+    axios.get(cityUrl).then((response) => {
+      console.log(response.data);
+      setLatitude(response.data[0].lat);
+      setLongitude(response.data[0].lon);
+    });
+  };
 
-  const searchLocation = (event) => {
-    if (event.key === "Enter") {
+  useEffect(() => {
+    if (latitude) {
+      const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=4ddd21df58bbb82ea15279b5f4f07fc2`;
       axios.get(weatherUrl).then((response) => {
         setData(response.data);
         console.log(response.data);
       });
     }
-  };
+  }, [latitude, longitude]);
 
   return (
     <div className="weather">
       <Navbar />
-      <div className="search">
+      <form className="search">
         <input
-          value={location}
           onChange={(event) => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
           placeholder="Enter Location"
           type="text"
         />
-      </div>
-      <div className="weather-container">
-        <div className="circle" id="humidity">
-          <p>Humidity: 50%</p>
-        </div>
-        <div className="circle" id="weather-top">
-          <div className="location">
-            <p>Pigue</p>
+        <button className="search-button" onClick={handleSubmit}>
+          Search
+        </button>
+      </form>
+      {data.name ? (
+        <div className="weather-container">
+          <div className="circle" id="humidity">
+            <p>Humidity</p>
+            <p className="bold">{data.main.humidity}%</p>
           </div>
-          <div className="temp">
-            <h1>60ºF</h1>
+          <div className="circle" id="weather-top">
+            <div className="location">
+              <p>{data.name}</p>
+            </div>
+            <div className="temp">
+              <h1>{data.main.temp}ºF</h1>
+            </div>
+            <div className="weather-description">
+              <p className="bold">{data.weather[0].main}</p>
+            </div>
           </div>
-          <div className="weather-description">
-            <p>Sunny</p>
-          </div>
-        </div>
 
-        <div className="circle" id="temp-feels">
-          <p>Feels: 64ºF</p>
+          <div className="circle" id="temp-feels">
+            <p>Feels like</p>
+            <p className="bold">{data.main.feels_like}ºF</p>
+          </div>
+          <div className="circle" id="wind">
+            <p>Wind speed</p>
+            <p className="bold">{data.wind.speed} MPH</p>
+          </div>
         </div>
-        <div className="circle" id="wind">
-          <p>Wind: 25 MPH</p>
-        </div>
-      </div>
+      ) : (
+        <div className="empty"></div>
+      )}
     </div>
   );
 };
