@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { UnitsContext } from "../../context/UnitsContext";
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Weather = () => {
   const { getUnits, getTempUnit, getWindUnit, MilesPerHourToKmPerHour } =
@@ -14,6 +15,7 @@ const Weather = () => {
 
   const [activateAnimation, setActivateAnimation] = useState(false);
   const [fadeAnimation, setFadeAnimation] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
 
   const activate = () => {
     setActivateAnimation(true);
@@ -29,6 +31,7 @@ const Weather = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setShowDetails(false);
     console.log(location);
     const cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=4ddd21df58bbb82ea15279b5f4f07fc2`;
     axios
@@ -70,7 +73,10 @@ const Weather = () => {
   }, [activateAnimation]);
 
   return (
-    <div className="weather" id={fadeAnimation}>
+    <div
+      className={showDetails ? "weather-detailed" : "weather"}
+      id={fadeAnimation}
+    >
       <Navbar activate={activate} />
       <form className="search">
         <input
@@ -83,40 +89,73 @@ const Weather = () => {
         </button>
       </form>
       {data.name ? (
-        <div className="weather-container">
-          <div className="circle" id="humidity">
-            <p>Humidity</p>
-            <p className="bold">{data.main.humidity}%</p>
-          </div>
-          <div className="circle" id="weather-top">
-            <div className="location">
-              <p>{data.name}</p>
+        <div className="weather-full-container">
+          <div className="weather-container">
+            <div className="circle" id="humidity">
+              <p>Humidity</p>
+              <p className="bold">{data.main.humidity}%</p>
             </div>
-            <div className="temp">
-              <h1>
-                {data.main.temp}
-                {getTempUnit()}
-              </h1>
+            <div className="circle" id="weather-top">
+              <div className="location">
+                <p>{data.name}</p>
+              </div>
+              <div className="temp">
+                <h1>
+                  {data.main.temp}
+                  {getTempUnit()}
+                </h1>
+              </div>
+              <div className="weather-description">
+                <p className="bold">{data.weather[0].main}</p>
+              </div>
             </div>
-            <div className="weather-description">
-              <p className="bold">{data.weather[0].main}</p>
-            </div>
-          </div>
 
-          <div className="circle" id="temp-feels">
-            <p>Feels like</p>
-            <p className="bold">
-              {data.main.feels_like}
-              {getTempUnit()}
-            </p>
+            <div className="circle" id="temp-feels">
+              <p>Feels like</p>
+              <p className="bold">
+                {data.main.feels_like}
+                {getTempUnit()}
+              </p>
+            </div>
+            <div className="circle" id="wind">
+              <p>Wind speed</p>
+              <p className="bold">
+                {getUnits() === "imperial"
+                  ? data.wind.speed
+                  : MilesPerHourToKmPerHour(data.wind.speed).toFixed(2)}
+                {getWindUnit()}
+              </p>
+            </div>
           </div>
-          <div className="circle" id="wind">
-            <p>Wind speed</p>
-            <p className="bold">
-              {getUnits() === "imperial"
-                ? data.wind.speed
-                : MilesPerHourToKmPerHour(data.wind.speed).toFixed(2)}
-              {getWindUnit()}
+          <div className="extension">
+            <Button
+              variant="contained"
+              onClick={() => {
+                setShowDetails(true);
+              }}
+            >
+              <a
+                href="#show-details"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Extend details
+              </a>
+            </Button>
+          </div>
+          <div
+            className={showDetails ? "weather-details" : "hide-details"}
+            id="show-details"
+          >
+            <p>Description: {data.weather[0].description}</p>
+            <p>Pressure: {data.main.pressure}hPa</p>
+            <p>Visibility: {data.visibility}m</p>
+            <p>Wind direction: {data.wind.deg}º</p>
+            <p>Clouds: {data.clouds.all}%</p>
+            <p>
+              Rain volume for the last hour: {data.rain ? data.rain["1h"] : 0}mm
+            </p>
+            <p>
+              Snow volume for the last hour: {data.snow ? data.snow["1h"] : 0}mm
             </p>
           </div>
         </div>
