@@ -53,8 +53,6 @@ const Home = () => {
             <Button variant="outlined" onClick={goWeather}>
               Weather today
             </Button>
-            <Button variant="outlined">Record</Button>
-            <Button variant="outlined">Numbers</Button>
             {getUnits() === "imperial" ? (
               <Button variant="outlined" onClick={() => changeUnits("metric")}>
                 Use Metric System

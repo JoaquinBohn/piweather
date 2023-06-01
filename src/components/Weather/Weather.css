@@ -76,6 +76,14 @@
   align-items: center;
 }
 
+.extension {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 30%;
+}
+
 .weather-details {
   margin-top: 50px;
   width: 30%;

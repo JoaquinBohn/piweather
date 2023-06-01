@@ -72,6 +72,52 @@ const Weather = () => {
     }
   }, [activateAnimation]);
 
+  const createTXTFile = () => {
+    var currentDate = new Date();
+    var dateTime =
+      currentDate.getDate() +
+      "/" +
+      (currentDate.getMonth() + 1) +
+      "/" +
+      currentDate.getFullYear() +
+      " - " +
+      currentDate.getHours() +
+      ":" +
+      currentDate.getMinutes() +
+      ":" +
+      currentDate.getSeconds();
+    const text = `${data.name} - ${dateTime}\nTemperature: ${
+      data.main.temp
+    }${getTempUnit()}\nTemperature feels like: ${
+      data.main.feels_like
+    }${getTempUnit()}\n${data.weather[0].main}\nWind speed: ${
+      getUnits() === "imperial"
+        ? data.wind.speed
+        : MilesPerHourToKmPerHour(data.wind.speed).toFixed(2)
+    }${getWindUnit()}\nHumidity: ${data.main.humidity}%\nDescription: ${
+      data.weather[0].description
+    }\nPressure: ${data.main.pressure}hPa\nVisibility: ${
+      data.visibility
+    }m\nWind direction: ${data.wind.deg}º\nClouds: ${
+      data.clouds.all
+    }%\nRain volume for the last hour: ${
+      data.rain ? data.rain["1h"] : 0
+    }mm\nSnow volume for the last hour: ${data.snow ? data.snow["1h"] : 0}mm`;
+
+    return text;
+  };
+
+  const downloadFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([createTXTFile()], {
+      type: "text/plain;charset=utf-8",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = data.name + data.weather[0].id + ".txt";
+    document.body.appendChild(element);
+    element.click();
+  };
+
   return (
     <div
       className={showDetails ? "weather-detailed" : "weather"}
@@ -140,6 +186,10 @@ const Weather = () => {
               >
                 Extend details
               </a>
+            </Button>
+
+            <Button variant="contained" onClick={downloadFile}>
+              Download data
             </Button>
           </div>
           <div
