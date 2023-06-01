@@ -13,6 +13,10 @@
   background-position: center center;
 }
 
+#weather-fade {
+  animation: weatherFade linear 0.5s;
+}
+
 .search {
   position: absolute;
   top: 20px;
@@ -123,5 +127,14 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes weatherFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

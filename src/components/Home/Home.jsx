@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UnitsContext } from "../../context/UnitsContext";
 import "./Home.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const { changeUnits, getUnits } = useContext(UnitsContext);
+
   const [active, setActive] = useState(false);
   const [homeAnimation, setHomeAnimation] = useState("");
   const [logoAnimation, setLogoAnimation] = useState("");
@@ -52,6 +55,18 @@ const Home = () => {
             </Button>
             <Button variant="outlined">Record</Button>
             <Button variant="outlined">Numbers</Button>
+            {getUnits() === "imperial" ? (
+              <Button variant="outlined" onClick={() => changeUnits("metric")}>
+                Use Metric System
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                onClick={() => changeUnits("imperial")}
+              >
+                Use Imperial System
+              </Button>
+            )}
           </div>
         </div>
       </div>

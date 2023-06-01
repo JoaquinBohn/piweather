@@ -1,4 +1,5 @@
 import React from "react";
+import UnitsContextProvider from "./context/UnitsContext";
 import Home from "./components/Home/Home";
 import Weather from "./components/Weather/Weather";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,11 +11,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <UnitsContextProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/weather" element={<Weather />} />
-      </Routes>
+          <Route path="/weather" element={<Weather />} />
+        </Routes>
+      </UnitsContextProvider>
     </BrowserRouter>
   );
 }
