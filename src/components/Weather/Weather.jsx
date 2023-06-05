@@ -149,40 +149,43 @@ const Weather = () => {
       {data.name ? (
         <div className="weather-full-container">
           <div className="weather-container">
-            <div className="circle" id="humidity">
-              <p>Humidity</p>
-              <p className="bold">{data.main.humidity}%</p>
-            </div>
             <div className="circle" id="weather-top">
-              <div className="location">
+              <div>
                 <p>{data.name}</p>
               </div>
-              <div className="temp">
+              <div>
                 <h1>
                   {data.main.temp}
                   {getTempUnit()}
                 </h1>
               </div>
-              <div className="weather-description">
+              <div>
                 <p className="bold">{data.weather[0].main}</p>
               </div>
             </div>
+            <div className="weather-block">
+              <div className="circle" id="temp-feels">
+                <p>Feels like</p>
+                <p className="bold">
+                  {data.main.feels_like}
+                  {getTempUnit()}
+                </p>
+              </div>
 
-            <div className="circle" id="temp-feels">
-              <p>Feels like</p>
-              <p className="bold">
-                {data.main.feels_like}
-                {getTempUnit()}
-              </p>
-            </div>
-            <div className="circle" id="wind">
-              <p>Wind speed</p>
-              <p className="bold">
-                {getUnits() === "imperial"
-                  ? data.wind.speed
-                  : MilesPerHourToKmPerHour(data.wind.speed).toFixed(2)}
-                {getWindUnit()}
-              </p>
+              <div className="circle" id="wind">
+                <p>Wind speed</p>
+                <p className="bold">
+                  {getUnits() === "imperial"
+                    ? data.wind.speed
+                    : MilesPerHourToKmPerHour(data.wind.speed).toFixed(2)}
+                  {getWindUnit()}
+                </p>
+              </div>
+
+              <div className="circle" id="humidity">
+                <p>Humidity</p>
+                <p className="bold">{data.main.humidity}%</p>
+              </div>
             </div>
           </div>
           <div className="extension">

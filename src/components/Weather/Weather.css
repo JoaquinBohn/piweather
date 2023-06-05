@@ -62,11 +62,11 @@
 
 .weather-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 80vh;
-  padding-bottom: 100px;
 }
 
 .weather-full-container {
@@ -109,7 +109,7 @@
   align-items: center;
   border-radius: 50%;
   background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 1px #0000004b;
+  box-shadow: 6px 6px 6px 1px #0000004b;
 }
 
 .bold {
@@ -126,39 +126,35 @@
 }
 
 #weather-top {
-  width: 300px;
-  height: 300px;
-  z-index: 1;
+  width: 220px;
+  height: 220px;
   animation: appear linear 1s;
 }
 
+.weather-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 30%;
+  width: 30%;
+}
+
 #temp-feels {
-  width: 190px;
-  height: 190px;
-  position: absolute;
-  bottom: 250px;
-  right: 380px;
-  z-index: 2;
+  width: 120px;
+  height: 120px;
   animation: appear linear 2s;
 }
 
 #humidity {
-  width: 130px;
-  height: 130px;
-  position: absolute;
-  bottom: 200px;
-  left: 450px;
-  z-index: 3;
+  width: 120px;
+  height: 120px;
   animation: appear linear 2s;
 }
 
 #wind {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  bottom: 150px;
-  right: 480px;
-  z-index: 3;
+  width: 130px;
+  height: 130px;
   animation: appear linear 2s;
 }
 
@@ -210,39 +206,30 @@
     font-size: 30px;
   }
 
-  .weather-container {
-    padding-bottom: 50px;
+  .weather-block {
+    height: 40%;
+    width: 100%;
   }
 
   #weather-top {
     width: 180px;
     height: 180px;
-    position: absolute;
-    left: 100px;
+    z-index: 3;
   }
 
   #temp-feels {
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    bottom: 230px;
-    right: 20px;
+    width: 100px;
+    height: 100px;
   }
 
   #humidity {
     width: 100px;
     height: 100px;
-    position: absolute;
-    bottom: 180px;
-    left: 50px;
   }
 
   #wind {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    bottom: 140px;
-    right: 50px;
+    width: 120px;
+    height: 120px;
   }
 
   .extension {
@@ -287,39 +274,29 @@
     font-size: 40px;
   }
 
-  .weather-container {
-    padding-bottom: 50px;
+  .weather-block {
+    height: 40%;
+    width: 60%;
   }
 
   #weather-top {
     width: 220px;
     height: 220px;
-    position: absolute;
-    left: 280px;
   }
 
   #temp-feels {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    bottom: 200px;
-    right: 160px;
+    width: 120px;
+    height: 120px;
   }
 
   #humidity {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    bottom: 180px;
-    left: 230px;
+    width: 120px;
+    height: 120px;
   }
 
   #wind {
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    bottom: 110px;
-    right: 210px;
+    width: 140px;
+    height: 140px;
   }
 
   .extension {
