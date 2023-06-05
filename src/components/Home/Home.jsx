@@ -44,29 +44,48 @@ const Home = () => {
           <img
             className="logo-img"
             id={imgAnimation}
-            src="https://res.cloudinary.com/drdgu83bp/image/upload/v1685390672/piweather/logo_o2kw6f.png"
+            src="https://res.cloudinary.com/drdgu83bp/image/upload/v1685982370/piweather/logo_qoyf8l.png"
             alt=""
           />
         </div>
         <div className="home-bottom">
           <div className="home-buttons" id={animation}>
-            <Button variant="outlined" onClick={goWeather}>
-              Weather today
+            <Button
+              variant="outlined"
+              onClick={goWeather}
+              style={{
+                minWidth: "50px",
+                minHeight: "50px",
+              }}
+            >
+              Weather now!
             </Button>
             {getUnits() === "imperial" ? (
-              <Button variant="outlined" onClick={() => changeUnits("metric")}>
+              <Button
+                variant="outlined"
+                onClick={() => changeUnits("metric")}
+                style={{
+                  minWidth: "50px",
+                  minHeight: "50px",
+                }}
+              >
                 Use Metric System
               </Button>
             ) : (
               <Button
                 variant="outlined"
                 onClick={() => changeUnits("imperial")}
+                style={{
+                  minWidth: "50px",
+                  minHeight: "50px",
+                }}
               >
                 Use Imperial System
               </Button>
             )}
           </div>
         </div>
+        <h4>Powered by ©Santoto</h4>
       </div>
     </div>
   );

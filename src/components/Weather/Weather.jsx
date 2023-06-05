@@ -13,6 +13,18 @@ const Weather = () => {
 
   const navigate = useNavigate();
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const setWindowWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", setWindowWidth);
+    return () => {
+      window.removeEventListener("resize", setWindowWidth);
+    };
+  }, []);
+
   const [activateAnimation, setActivateAnimation] = useState(false);
   const [fadeAnimation, setFadeAnimation] = useState("");
   const [showDetails, setShowDetails] = useState(false);
@@ -179,16 +191,27 @@ const Weather = () => {
               onClick={() => {
                 setShowDetails(true);
               }}
+              sx={{
+                width: { xs: "150px", md: "100px", lg: "200px" },
+                height: { xs: "30px", md: "40px", lg: "50px" },
+              }}
+              size={screenWidth < 481 ? "small" : "medium"}
             >
-              <a
-                href="#show-details"
-                style={{ textDecoration: "none", color: "white" }}
-              >
+              <a href="#show-details" className="extend-link">
                 Extend details
               </a>
             </Button>
 
-            <Button variant="contained" onClick={downloadFile}>
+            <Button
+              variant="contained"
+              onClick={downloadFile}
+              sx={{
+                width: { xs: "150px", md: "100px", lg: "200px" },
+                height: { xs: "30px", md: "40px", lg: "50px" },
+                fontSize: { xs: "12px", md: "15px" },
+              }}
+              size={screenWidth < 481 ? "small" : "medium"}
+            >
               Download data
             </Button>
           </div>

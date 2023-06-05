@@ -20,7 +20,7 @@ const Navbar = ({ activate }) => {
         >
           <img
             className="navbar-logo-img"
-            src="https://res.cloudinary.com/drdgu83bp/image/upload/v1685390672/piweather/logo_o2kw6f.png"
+            src="https://res.cloudinary.com/drdgu83bp/image/upload/v1685982370/piweather/logo_qoyf8l.png"
             alt=""
           />
         </button>
