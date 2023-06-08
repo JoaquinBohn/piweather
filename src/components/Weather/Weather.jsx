@@ -11,8 +11,7 @@ const Weather = () => {
   const { getUnits, getTempUnit, getWindUnit, MilesPerHourToKmPerHour } =
     useContext(UnitsContext);
 
-  const navigate = useNavigate();
-
+  //Esta seccion se encarga de obtener el ancho de pantalla cada vez que cambia
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const setWindowWidth = () => {
@@ -24,10 +23,14 @@ const Weather = () => {
       window.removeEventListener("resize", setWindowWidth);
     };
   }, []);
+  //---------------------------------------------------------------------------
 
+  //Esta seccion maneja la logica de asignacion de animaciones
   const [activateAnimation, setActivateAnimation] = useState(false);
   const [fadeAnimation, setFadeAnimation] = useState("");
   const [showDetails, setShowDetails] = useState(false);
+
+  const navigate = useNavigate();
 
   const activate = () => {
     setActivateAnimation(true);
@@ -36,6 +39,16 @@ const Weather = () => {
     }, 500);
   };
 
+  useEffect(() => {
+    if (activateAnimation) {
+      setFadeAnimation("weather-fade");
+    }
+  }, [activateAnimation]);
+  //---------------------------------------------------------------------------
+
+  //Esta seccion maneja la logica de la request a la api y la obtencion de los datos
+  //Primero se usa la api de geolocalizacion para obtener los valores de latitud y longitud
+  //Luego se hace la request a la api de openweather para obtener los datos del tiempo
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState();
@@ -44,17 +57,14 @@ const Weather = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setShowDetails(false);
-    console.log(location);
     const cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=4ddd21df58bbb82ea15279b5f4f07fc2`;
     axios
       .get(cityUrl)
       .then((response) => {
-        console.log(response.data);
         setLatitude(response.data[0].lat);
         setLongitude(response.data[0].lon);
       })
       .catch((error) => {
-        console.log(error);
         Swal.fire(
           "Location error",
           "Invalid location, please try again",
@@ -70,20 +80,19 @@ const Weather = () => {
         .get(weatherUrl)
         .then((response) => {
           setData(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          Swal.fire(
+            "Unexpected error",
+            "Something went wrong, please try again",
+            "error"
+          );
         });
     }
   }, [latitude, longitude, getUnits]);
+  //---------------------------------------------------------------------------
 
-  useEffect(() => {
-    if (activateAnimation) {
-      setFadeAnimation("weather-fade");
-    }
-  }, [activateAnimation]);
-
+  //Esta seccion maneja la logica de la creacion y descarga del archivo txt con los datos del tiempo
   const createTXTFile = () => {
     var currentDate = new Date();
     var dateTime =
@@ -129,6 +138,7 @@ const Weather = () => {
     document.body.appendChild(element);
     element.click();
   };
+  //---------------------------------------------------------------------------
 
   return (
     <div
