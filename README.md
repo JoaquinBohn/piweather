@@ -1,6 +1,10 @@
 # App de consulta del clima
 
-Este es un proyecto de aplicación web de consulta del tiempo climático de una locación determinada. El mismo está desarrollado con react js y extrae los datos de la api de consulta del clima [openweathermap](https://openweathermap.org/current).
+Este es un proyecto de aplicación web de consulta del tiempo climático de una locación determinada. El mismo está desarrollado con react js y extrae los datos de dos apis:
+
+- Api de consulta del clima [openweathermap](https://openweathermap.org/current).
+- Api de geolocalización [openweathermap](https://openweathermap.org/api/geocoding-api).
+
 Existe una diferencia de nombres, en el repositorio encontraran este proyecto bajo el nombre de piweather, mientras que en el sitio desplegado tendrá el nombre de monkeyweather.
 
 Sitio desplegado: [ir al sitio](https://monkeyweather.vercel.app/)
